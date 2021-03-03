@@ -1,0 +1,61 @@
+<DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <meta charset='utf-8'>
+            <link rel="stylesheet" type="text/css" href="style.css">
+        </head>
+    <body>
+        <header>
+
+            <div id="signupLogin">
+                 <a href="#" onclick="displaySignup()">inscription</a>
+                 <a href="#" onclick="displayLogin()">connexion</a>
+
+                 <div id="signup">
+                    <form name="signup">
+                        <label for="email">email</label>
+                        <input id="emailSignup" type="texte" name="email">
+                        <label for="password">password</label>
+                        <input  id="passwordSignup" type="texte" name="password">
+                        <label for="pseudo">Pseudo</label>
+                        <input id="pseudoSignup" type="texte" name="pseudo">
+                        <button  onclick="inscription()" type="button">inscription</button>
+                    </form>
+                </div>
+
+                <div id="login">
+                    <form name="login" post="/login">
+                        <label name="email">email</label>
+                        <input  id="emailLogin" type="texte" name="email">
+                        <label name="password">password</label>
+                        <input id="passwordLogin" type="texte" name="password">
+                        <button type="button" onclick="connexion()">connexion</button>  
+                    </form>
+                </div>
+
+            </div>
+
+            </header>   
+
+          
+                    
+                <div id="profilage"></div>
+                     <div id="getPost"></div>
+                     
+                     <div id="getPostId"></div>
+                     <div id="getCommentaire"></div>
+                       <div id="formProfil">
+                            
+                         </div>
+
+                    
+                    
+               
+            
+
+      
+       
+        
+        </body>
+        <script src="indextest.js"></script>
+        </html>
