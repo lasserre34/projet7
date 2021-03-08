@@ -10,15 +10,7 @@ exports.signup = function(req, res, next) {
     pseudo: req.body.pseudo 
      })
    // function sql  qui  enregistre les données dans de l'inscription dans la BDD 
-     User.create = function (newEmp, result) {
-    dbConn.query ("INSERT INTO user set ? "  , newEmp, function (err, res)  {
-        if(err) { 
-             console.log("error: ", err);  result(err, null);
-            }
-            else{
-                  console.log(res.insertId);  result(null, res.user);}
-                });
-            }
+   
 
     if(!req.body.email || !req.body.password){
           res.status(400).send(
@@ -107,17 +99,7 @@ exports.signup = function(req, res, next) {
            userId: deleteUserObject.userId
          }
         
-        User.delete= function(newEmp , result){ 
-         dbConn.query ("DELETE FROM user WHERE ?"  , newEmp, function (err, res)  {
-          if(err) { 
-               console.log("error: ", err);  result(err, null);
-              }
-              else{
-                    console.log(res.insertId);  result(null, res.user);}
-                  });
-              }
-            
-
+      
            if(!req.body){
              res.status(400).send({message:""})
            }

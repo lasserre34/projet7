@@ -22,11 +22,35 @@ Profil.create = function(newEmp , result){
                   console.log(res.insertId);  result(null, res.insertId);}
                 });
             };
+// function sql pour recupere le  profil  de l'utilisateur via son id
+            Profil.getOneProfil = function( newEmp ,result){
+                dbConn.query("SELECT * FROM profil WHERE userId=?" , newEmp ,   function(err,res){
+                    if(err){
+                        console.log("error: " , err); result(err,null);
+                    }
+                    else{
+                         result(null, res );
+                         
+                       
+                    }
+                })
+            }
+         // function sql pour modifier le profil 
+            Profil.update = function(newEmp , result ){
+              
+                dbConn.query(`UPDATE profil  SET pseudo='${newEmp.pseudo}' , imageProfil='${newEmp.imageProfil}' , first_Name='${newEmp.firstName}', last_Name='${newEmp.lastName}' WHERE userId='${newEmp.userId}'` , newEmp, function (err, res)  {
+                    if(err) { 
+                         console.log("error: ", err);  result(err, null);
+                         console.log(newEmp.pseudo)
+                        }
+                        else{
+                              console.log(res.insertId);  result(null, res.insertId);}
+                           
+                           
+                             
+                            });
+                        };
 
-
-         
-
-//
 
 
 module.exports = Profil ; 

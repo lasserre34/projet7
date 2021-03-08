@@ -1,4 +1,5 @@
 
+document.getElementById('returnProfil').style.display="block" ; 
 
 var $_GET = [];
 var parts = window.location.search.substr(1).split("&");
@@ -8,11 +9,11 @@ for (var i = 0; i < parts.length; i++) {
 }
 temp.pop()
 console.log(temp);
-postId = temp[0]
+ var postId = temp[0]
 // si commentairID EST UNDEFINED ALORS LA requette  ne S'envoit pas 
 getOnePost()
 var recupPost
-
+var postIdCom 
  function getOnePost(){
  var request = new XMLHttpRequest();
 
@@ -28,7 +29,7 @@ if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
         <button  id="btnDeletePost" onclick="deletePost('${index}')">Supprimer le post</button>
         
          `
-
+       postIdCom = response.postId
          document.getElementById('getPostId').appendChild(postGetId)
    })
      commentairePost()
@@ -46,7 +47,7 @@ request.send();
 var recupCommentairePost
 
  function commentairePost(){
-recupCommentairePost = []
+  recupCommentairePost = []
 console.log(recupCommentairePost)
 var request = new XMLHttpRequest();
 
@@ -69,10 +70,10 @@ if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
    // console.log(recupCommentairePost.length)
      const recupCommentaire = document.createElement('div')
      recupCommentaire.innerHTML = `
-     <p> ${element.pseudo}</p>
-     <p> ${element.commentaire}</p>
+     <p>${element.pseudo}</p>
+     <input  id="comments"type="texte" placeholder="${element.commentaire}">
      <button id="btnDeleteCommentaire" onclick="deleteCommentaire(${index})">supprimer</button>
-   
+     <button id="btnModifyComments" onclick="modifyComments(${index})">modifier le commentaire</button>
      `
      
      document.getElementById('getCommentaire').appendChild(recupCommentaire) ; 
@@ -89,7 +90,10 @@ if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
        
 };  
 }
-request.open("GET", "http://localhost:3000/api/post/forum/" + postId);
+
+
+
+request.open("GET", "http://localhost:3000/api/post/commentaire/" + postId);
 request.setRequestHeader('Content-Type', 'application/json');
 const  tokens = sessionStorage.getItem('token')
 
@@ -117,14 +121,15 @@ const  tokens = sessionStorage.getItem('token')
   };  
   const  tokens = sessionStorage.getItem('token')
    var token = JSON.parse(tokens)
-  request.open("POST", "http://localhost:3000/api/post/postcommentaire/");
+  request.open("POST", "http://localhost:3000/api/post/commentaire");
+  request.setRequestHeader('Content-Type' ,'application/json')
   request.setRequestHeader('Authorization', ` Bearer ${token}`);
 
    
   
    
  var pseudoStorage = sessionStorage.getItem('pseudo')
- var userIdStorage = sessionStorage.getItem('userId')
+ var userIdStorage = JSON.parse(sessionStorage.getItem('userId'))
 
  this.objectCommentaire ={
      postId: postId , 
@@ -134,11 +139,42 @@ const  tokens = sessionStorage.getItem('token')
      
    }
    this.commentaire = JSON.stringify(this.objectCommentaire)
-   formData = new FormData()
-   formData.append("commentaire",this.commentaire )
-  request.send(formData);
+   //formData = new FormData()
+   //formData.append("commentaire",this.commentaire )
+  request.send(this.commentaire);
 
 }
+
+function modifyComments(index) {
+  var commentsPostId = recupCommentairePost[index].id
+  this.recupUserIdComments = recupCommentairePost[index].userId
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() { /* requette PUT qui va envoyer a la BDD les modification apporter au commentaire */
+    
+ console.log(this.commentsPostId)
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+          var response = JSON.parse(request.responseText);
+          console.log(response)
+      }
+    }
+    const  tokens = sessionStorage.getItem('token')
+ 
+    var token = JSON.parse(tokens)
+  request.open("PUT", "http://localhost:3000/api/post/commentaire/update/" +  commentsPostId);
+  request.setRequestHeader('Content-Type' , 'application/json')
+   request.setRequestHeader('Authorization', ` Bearer ${token}`);
+
+  var commentsModify={
+     commentaire: document.getElementById('comments').value , 
+     userId: this.recupUserIdComments 
+     
+   }
+ 
+   var comment = JSON.stringify(commentsModify)
+   request.send(comment);   
+}
+
+
 
 function deleteCommentaire(index){
  var idCommentaire = recupCommentairePost[index].id
@@ -161,8 +197,11 @@ function deleteCommentaire(index){
     request.setRequestHeader('Content-Type', 'application/json')
     request.setRequestHeader('Authorization', ` Bearer ${token}`);
      
+    this.postIdCommentaire = postId
+    
     this.deleteCommentaires ={
-      userId: this.recupUserIdCommentaire
+      userId: this.recupUserIdCommentaire ,
+      postId: this.postIdCommentaire
     }
     
     this.userIdCommentaire = JSON.stringify(this.deleteCommentaires)
@@ -185,7 +224,10 @@ function deletePost(index){
     if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
         var response = JSON.parse(this.responseText);
         console.log(postId)
-        document.getElementById('getPostId').innerHTML= " " ; 
+        document.getElementById('getPostId').innerHTML= " " ;
+         
+        document.getElementById('getCommentaire').innerHTML= " " ; 
+        document.location.href="forum.html"
                     
           }
      }
@@ -198,10 +240,12 @@ function deletePost(index){
     
    
     //fd = new FormData()
-  
+ 
+
     
    this.postDelete ={
-     userId: this.recupUserIdPost
+     userId: this.recupUserIdPost , 
+     
    }
 
     this.userIdPostDelete = JSON.stringify(this.postDelete)
@@ -212,3 +256,4 @@ function deletePost(index){
 
 
 }
+

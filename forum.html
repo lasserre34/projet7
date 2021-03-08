@@ -1,0 +1,47 @@
+<DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <meta charset='utf-8'>
+            <link rel="stylesheet" type="text/css" href="style.css">
+        </head>
+    <body>
+        <header>
+              <ul id="listProfil">
+                    <li class="deroulant"><a href="#">Mon compte</a>
+                       
+                         <ul class="sous">
+                           <li class="deroulant" id="profilDeroulant"><a href="#" onclick="buttonProfil()">Profil</a>
+                            <li class="deroulant" id="returnProfil"><a href="#" onclick="returnProfil()">Retourner au menu principal</a> 
+                            </li>
+                           <li><a href="#" onclick="deconnexion()">Déconnexion</a></li>
+                           <li><a href="#" onclick="deleteUser()">Suppression du compte</a></li>
+                         </ul>
+                         </li>
+                    </li>
+                
+                      <li><a id="post" href="#" onclick="displayFormPost()">Poster</a></li>
+              </ul>
+ </header>   
+
+            <div id="divPost">
+                <form  method="POST"  enctype="multipart/form-data">
+                    <label name="file">Fichier à partager</label>
+                    <input  name="image" id="filePost" type="file">
+                    <input type="button" onclick="post()" value="partager">
+                </form>
+            </div>
+                    
+                <div id="profilage"></div>
+                <div id="flex">
+                     <div id="getPost"></div>
+                     <div id="coms"></div>
+                </div>
+                     <div id="getPostId"></div>
+                     <div id="getCommentaire"></div>
+                       <div id="formProfil">
+                            
+                         </div>
+
+ </body>
+        <script src="index.js"></script>
+        </html>

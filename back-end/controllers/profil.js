@@ -26,29 +26,23 @@ exports.CreateProfil = function(req ,res , next ){
 
 // function pour recuperer le profil 
   exports.getOneProfilUnique = function(req,res){
-   
-   // function sql pour recupérer un profil de la base de données ; 
-    Profil.getOneProfil = function( newEmp ,result){
-        dbConn.query("SELECT * FROM profil WHERE userId=" + req.params.id , newEmp ,   function(err,res){
-            if(err){
-                console.log("error: " , err); result(err,null);
-            }
-            else{
-                console.log(res.insertId)  , result(null, res.insertId );
-               
-            }
-        })
-    }
+   var reqParamsId = req.params.id 
+  
+
       if(!req.params.id){
          return res.status(400).json({message:"ere"})
       }
       else{
-    Profil.getOneProfil(function(err,data){  
+    Profil.getOneProfil(reqParamsId,(err,data)=>{  
       if(err){
       res.status(400).json({message:""})
     }
       else{ 
           res.status(200).json({data})
+
+          console.log(req.params.id)
+          console.log(data)
+        
              }
           })
         }
@@ -59,71 +53,31 @@ exports.CreateProfil = function(req ,res , next ){
     const profilObject =  req.file ?
 {
   ...JSON.parse(req.body.profil) ,
+  userId: req.params.id , 
   imageProfil:  `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 } : JSON.parse(req.body.profil) 
 
-console.log(profilObject.imageProfil)
-
-      // function sql pour modifier le profil  
-      Profil.update = function(newEmp , result ){
-        dbConn.query(`UPDATE profil  SET pseudo='${profilObject.pseudo}' , imageProfil='${profilObject.imageProfil}' , first_Name='${profilObject.firstName}', last_Name='${profilObject.lastName}' WHERE userId='${req.params.id}'` , newEmp, function (err, res)  {
-            if(err) { 
-                 console.log("error: ", err);  result(err, null);
-                }
-                else{
-                      console.log(res.insertId);  result(null, res.insertId);}
-                    });
-                };
-                // function sql pour modifier le pseudo  dans la table user.
-                User.update = function(newEmp , result){ 
-                   dbConn.query(`UPDATE user  set pseudo='${profilObject.pseudo}'  WHERE userId= '${req.params.id}' `, newEmp , function(err,res){ 
-                      if(err) { 
-                           console.log("error: ", err);  result(err, null);
-                          }
-                          else{
-                                console.log(res.insertId);  result(null, res.user);
-                              }
-                              });
-                          };
-                          // function sql pour modifier le pseudo dans la table post 
-                          Post.update = function(newEmp , result ){
-                            dbConn.query(`UPDATE post  set pseudo='${profilObject.pseudo}'  WHERE userId= '${req.params.id}' ` , newEmp, function (err, res)  {
-                                if(err) { 
-                                     console.log("error: ", err);  result(err, null);
-                                    }
+  if(!req.body){
+  res.status(400).json({message:"le fichier n'est pas accepter"})
+  }
+     else{
+       // appel la requette sql qui va modifier les elements modifier dans la table profil
+        Profil.update(profilObject,(err,data)=>{
+         if(err){res.status(500).send({message:"errProfil"})}
+                     else{ 
+                       //appel la requette sql qui va modifier le pseudo de la table user(si le pseudo est modifier) 
+                         User.update(profilObject,(err,data)=>{
+                           if(err){res.status(500).send({message:"errUser"})}
                                     else{
-                                          console.log(res.insertId);  result(null, res.user);
-                                        }
-                                       });
-                                    };
-                                    // function sql pour modifier le pseudo dans les commentaire 
-                                    Commentaire.update = function(newEmp , result ){
-                                      dbConn.query(`UPDATE commentaire  set pseudo='${profilObject.pseudo}'  WHERE userId= '${req.params.id}' ` , newEmp, function (err, res)  {
-                                          if(err) { 
-                                               console.log("error: ", err);  result(err, null);
-                                              }
-                                              else{
-                                                    console.log(res.insertId);  result(null, res.user);
-                                                  }
-                                                 });
-                                              };
-                                       if(!req.body){
-                                        res.status(400).json({message:"le fichier n'est pas accepter"})
-                                       }
-                                         else{
-                                               Profil.update(function(err,data){
-                                         if(err){res.status(500).send({message:"err"})}
-                                            else{ 
-                                                  User.update(profilObject.pseudo,(err,data)=>{
-                                                   if(err){res.status(500).send({message:"err"})}
-                                                   else{
-                                                         Post.update(profilObject.pseudo,(err,data)=>{
-                                                         if(err){res.status(500).send({message:"err"})}
+                                      // appel la requette sql qui va modifier le pseudo de la table post(si le pseudo est modifier)
+                                          Post.update(profilObject,(err,data)=>{
+                                            if(err){res.status(500).send({message:"errPost"})}
+                                                  else{
+                                                    // appel la requette sql qui va modifer le pseudo de la table Commentaire(si le pseudo est modifier)
+                                                     Commentaire.update(profilObject,(err,data)=>{
+                                                       if(err){res.status(500).send({message:"errCommentaire"})}
                                                          else{
-                                                           Commentaire.update(profilObject.pseudo,(err,data)=>{
-                                                             if(err){res.status(500).send({message:"err"})}
-                                                             else{
-                                                               res.status(201).json(profilObject.pseudo)
+                                                             res.status(201).json(profilObject.pseudo)
                                                              }
                                                            })
                                                           }
