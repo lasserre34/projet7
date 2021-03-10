@@ -1,6 +1,6 @@
 
 // apel de la fonction get qui recupere les post de la base de données
-console.log(document.cookie.token)
+console.log(document.cookie.length)
 var cookie = document.cookie.split('token=')
 getALLpost()
 
