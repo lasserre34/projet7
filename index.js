@@ -105,7 +105,7 @@ function buttonProfil() {
     };
     
     
-    const userIdProfil = sessionStorage.getItem('userId')
+    const userIdProfil = localStorage.getItem('userId')
     const tokens = sessionStorage.getItem('token')
     var token = JSON.parse(tokens)
     request.open("GET", "https://localhost:3000/api/profil/getprofil/" + userIdProfil);
@@ -143,7 +143,7 @@ function modifyProfil() {
 
         }
     };
-    const userIdProfil = sessionStorage.getItem('userId')
+    const userIdProfil = localStorage.getItem('userId')
 
     request.open("PUT", "https://localhost:3000/api/updateprofil/" + userIdProfil);
     const tokens = sessionStorage.getItem('token')
@@ -259,9 +259,9 @@ function post() {
         userId: this.userIdPost
     }
 
-    this.userIdPost = sessionStorage.getItem('userId')
+    this.userIdPost = localStorage.getItem('userId')
 
-    this.pseudoPost = sessionStorage.getItem('pseudo')
+    this.pseudoPost = localStorage.getItem('pseudo')
 
 
     fd = new FormData()

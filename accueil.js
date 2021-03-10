@@ -121,8 +121,8 @@ function connexion() {
             user.forEach(element => {
                 /* va parcourir le tableau retourner en reponse , va recupérer l'élement "pseudo" est l'enregistrer dans un tableau
                                pour servir lors de la requette getprofil */
-                sessionStorage.setItem("pseudo", element.pseudo);
-                sessionStorage.setItem("userId", element.userId);
+                localStorage.setItem("pseudo", element.pseudo);
+                localStorage.setItem("userId", element.userId);
             
                
                 sessionStorage.setItem("token", JSON.stringify(response.token))

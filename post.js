@@ -135,8 +135,8 @@ function valideCommentaire() {
 
 
 
-    var pseudoStorage = sessionStorage.getItem('pseudo')
-    var userIdStorage = JSON.parse(sessionStorage.getItem('userId'))
+    var pseudoStorage = localStorage.getItem('pseudo')
+    var userIdStorage = JSON.parse(localStorage.getItem('userId'))
 
     this.objectCommentaire = {
         postId: postId,
