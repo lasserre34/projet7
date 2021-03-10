@@ -1,5 +1,27 @@
-const http = require('http');
+const fs = require('fs');
+const https = require('https');
 const app = require('./app');
+
+
+
+const { options } = require('./app');
+
+// route du certificat est mots de passe  
+  var credentials = { 
+  pfx: fs.readFileSync('./certificat.pfx'),
+  passphrase: `${process.env.PASS_SSL}`
+}
+      // retourne une erreur si le code dans le passphrase n'est pas le bon est permet de l'ajouter manuellement 
+try {
+  const tls = require('tls'); 
+  tls.createSecureContext(options);
+} catch (err) {
+  console.error('There was a TLS error!', err.message);
+  console.error('Did you enter the right passphrase?');
+  process.exit(1);
+}
+
+
 
 
 const normalizePort = val => {
@@ -36,8 +58,9 @@ const errorHandler = error => {
   }
 };
 
-
-const server = http.createServer(app);
+ //creation du serveur en https
+const server = https.createServer(credentials ,app);
+//const server = http.createServer(app);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
