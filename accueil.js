@@ -1,13 +1,10 @@
 
+if(document.cookie.length == 0){
 
-// apel de la fonction get qui recupere les post de la base de données
-
-
-
-
-   console.log(document.cookie.length)
-
-
+}
+else{
+    document.location.href="forum.html"
+}
 
 function displaySignup() {
     /* function apeler lors du click sur le lien "inscription" */
