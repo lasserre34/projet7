@@ -49,12 +49,19 @@ Profil.update = function(newEmp, result) {
             console.log(res.insertId);
             result(null, res.insertId);
         }
-
-
-
     });
 };
-
-
+// requette sql pour suprimer le profil de l'utilisateur 
+Profil.delete = function(newEmp, result) {
+    dbConn.query(`DELETE FROM profil WHERE userId='${newEmp.userId}'`, newEmp, function(err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log(res.UserIdPost);
+            result(null, res);
+        }
+    });
+};
 
 module.exports = Profil;

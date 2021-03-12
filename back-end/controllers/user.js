@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt'); 
 
 const { body, validationResult } = require('express-validator');
+const Post = require('../models/post');
+const Profil = require('../models/profil');
+const Commentaire = require('../models/commentaire');
 
 /*  inscription */
 exports.signup = function(req, res, next) {
@@ -85,14 +88,16 @@ exports.login = function(req, res) {
                   userId: data.userId,
                   
                   token: jwt.sign({
-                     userId: element.userId },
+                     userId: element.userId,
+                     pseudo: element.pseudo,
+                      admin: element.admin},
                      `${process.env.TOKEN}` ,
                      { expiresIn: '24h' }
                     
-                  ) 
-                });
-        })
-              })
+                    ) 
+                  });
+               })
+             })
              
           })
         
@@ -103,27 +108,47 @@ exports.login = function(req, res) {
 
 //fonction sql qui supprimera l'utilisateur 
 exports.deleteUser = function(req, res) {
-    const deleteUserObject = JSON.parse(req.body.userDelete)
+    const deleteUserObject = req.body.userId
     const deleteUser = {
 
-        userId: deleteUserObject.userId
+        userId: deleteUserObject
     }
 
-
+ 
     if (!req.body) {
         res.status(400).send({
             message: ""
         })
     } else {
+        // appel la fonction pour supprimer l'utilisateur de la base de donnée
         User.delete(deleteUser, (err, data) => {
-            if (err)
-                res.status(500).send({
-                    message: err.message || ""
-                });
-            else {
-                res.status(200).send({
-                    message: "l'utilisateur a était supprimer de la base de données"
+            if (err){
+                res.status(500).send({messgae:"errUser" });
+            }
+            else { // appel la fonction pour supprimer tout les post de l'utilisateur 
+                Post.deleteAllposte(deleteUser,(err,data)=>{
+                  if(err){
+                     res.status(500).send({message:"errPost"})
+                  }
+                  else{ // appel la fonction pour supprimer le profil de l'utilisateur 
+                      Profil.delete(deleteUser,(err,data)=>{
+                          if(err){
+                              res.status(500).send({message:"errProfil"})
+                          }
+                          else{ // appel la fonction pour supprimer tout les commentaire de l'utilisateur
+                              Commentaire.deleteAllCommentaire(deleteUser,(err,data)=>{
+                                  if(err){
+                                      res.status(500).send({message:"errCommentaire"})
+                                  }
+                                  else{
+                                      res.status(200).send({message:"vos données personnel sont supprimer"})
+                                  }
+                              })
+                          }
+                      })
+                  }
                 })
+            
             }
         })
     }

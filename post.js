@@ -1,4 +1,7 @@
 // recupération du cookie 
+if(document.length == 0){
+  document.location.href="index.html"
+}
 var cookie = document.cookie.split('token=')
  console.log(cookie[1])
 
@@ -25,7 +28,7 @@ function getOnePost() {
         /* requette GET qui affiche tout les commentaire via leur id  in html */
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             var response = JSON.parse(this.responseText);
-
+           
             recupPost = response
             recupPost.forEach(function(response, index) {
                 const postGetId = document.createElement('div')
@@ -62,8 +65,8 @@ function commentairePost() {
             var response = JSON.parse(this.responseText);
 
             document.getElementById('getCommentaire').innerHTML = " ";
-
-            recupCommentairePost = response.data;
+                reverseCom = response.data
+            recupCommentairePost = reverseCom.reverse()
             console.log(recupCommentairePost)
 
             if (recupCommentairePost.length == 0) {

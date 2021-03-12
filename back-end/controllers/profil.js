@@ -96,6 +96,10 @@ exports.updateProfil = function(req, res, next) {
                                         })
                                     } else {
                                         res.status(201).json(profilObject.pseudo)
+                                    
+                                       
+                                           
+                                         
                                     }
                                 })
                             }

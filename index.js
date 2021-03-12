@@ -1,4 +1,7 @@
 
+if(document.cookie.length == 0){
+    document.location.href="index.html"
+}
 // apel de la fonction get qui recupere les post de la base de données
 console.log(document.cookie.length)
 var cookie = document.cookie.split('token=')
@@ -138,6 +141,7 @@ function modifyProfil() {
             tbltPseudo.push(response)
             sessionStorage.setItem('pseudo', response)
             document.getElementById('getPost').innerHTML = "";
+            localStorage.setItem('pseudo' , document.getElementById('pseudoUpdate').value)
             getALLpost()
 
 
@@ -234,7 +238,7 @@ function post() {
         /*  requette post qui envoie dans la base de donnéer un fichier multimedia est le pseudo */
         if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
             var response = JSON.parse(request.responseText);
-
+           
             console.log(response.data)
             tbltUserIdObjectPost = [];
 
@@ -292,8 +296,11 @@ function getALLpost() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             var response = JSON.parse(this.responseText);
             var tbltConcat = [];
-            recupPost = response.post
-            recupCom = response.com
+
+            reversePost = response.post
+            recupPost = reversePost.reverse()
+            reverseCom = response.com
+            recupCom = reverseCom.reverse()
 
 
 
@@ -345,20 +352,24 @@ function deleteUser() {
         /* requette post envoyant le pseudo de l'utilisateur peremtant de lui crée un profil par default */
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             var response = JSON.parse(request.responseText);
-            tbltPseudo.splice(0, 1)
-            document.location.href = "index.html";
-            sessionStorage.setItem('token', " ");
+           // tbltPseudo.splice(0, 1)
+           deconnexion()
+           
         }
     };
 
     const tokens = sessionStorage.getItem('token')
     var token = JSON.parse(tokens)
     request.open("DELETE", "https://localhost:3000/api/auth/deleteuser");
+    request.setRequestHeader('Content-Type', 'application/json')
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
 
+     var Iduser = localStorage.getItem('userId')
+     var userIdDelete = JSON.parse(Iduser)
+    
     var objectDelete = {
 
-        userId: tbltUserId[0]
+        userId: userIdDelete
     }
     var deleteUser = JSON.stringify(objectDelete)
     //formData = new FormData()

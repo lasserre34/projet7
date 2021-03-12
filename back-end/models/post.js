@@ -102,4 +102,16 @@ Post.delete = function(newEmp, result) {
     });
 };
 
+// requette sql pour supprimer tout les post de l'utilisateur 
+Post.deleteAllposte = function(newEmp, result) {
+    dbConn.query(`DELETE FROM post WHERE userId='${newEmp.userId}'`, newEmp, function(err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        } else {
+            console.log(res.UserIdPost);
+            result(null, res);
+        }
+    });
+};
 module.exports = Post;

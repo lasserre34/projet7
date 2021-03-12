@@ -11,10 +11,13 @@ function Commentaire(com) {
 Commentaire.create = function(newEmp, result) {
 
     dbConn.query("INSERT INTO  commentaire  set ? ", newEmp, function(err, res) {
-        if (err) {
-            result(err, null);
 
-        } else {
+     if(err){
+         result(err,null)
+     }
+    
+         else {
+            console.log(newEmp.commentaire)
             result(null, res);
         }
     });
@@ -75,6 +78,16 @@ Commentaire.deleteCommentaire = function(newEmp, result) {
 // requette sql pour supprimer le commentaire selectionner 
 Commentaire.delete = function(newEmp, result) {
     dbConn.query(`DELETE FROM commentaire WHERE id='${newEmp.id}'`, function(err, res) {
+        if (err) {
+            result(err, null)
+        } else {
+            result(null, res)
+        }
+    })
+}
+// requette sql pour supprimer tout les commentaire poster par l'utilisateur 
+Commentaire.deleteAllCommentaire = function(newEmp, result) {
+    dbConn.query(`DELETE FROM commentaire WHERE userId='${newEmp.userId}'`, function(err, res) {
         if (err) {
             result(err, null)
         } else {
