@@ -1,47 +1,42 @@
 <DOCTYPE html>
-    <html lang="fr">
-        <head>
-            <meta charset='utf-8'>
-            <link rel="stylesheet" type="text/css" href="style.css">
-        </head>
-    <body>
-        <header>
-              <ul id="listProfil">
-                    <li class="deroulant"><a href="#">Mon compte</a>
-                       
-                         <ul class="sous">
-                           <li class="deroulant" id="profilDeroulant"><a href="#" onclick="buttonProfil()">Profil</a>
-                            <li class="deroulant" id="returnProfil"><a href="#" onclick="returnProfil()">Retourner au menu principal</a> 
-                            </li>
-                           <li><a href="#" onclick="deconnexion()">Déconnexion</a></li>
-                           <li><a href="#" onclick="deleteUser()">Suppression du compte</a></li>
-                         </ul>
-                         </li>
-                    </li>
-                
-                      <li><a id="post" href="#" onclick="displayFormPost()">Poster</a></li>
-              </ul>
- </header>   
-
-            <div id="divPost">
-                <form  method="POST"  enctype="multipart/form-data">
-                    <label name="file">Fichier à partager</label>
-                    <input  name="image" id="filePost" type="file">
-                    <input type="button" onclick="post()" value="partager">
-                </form>
-            </div>
-                    
-                <div id="profilage"></div>
-                <div id="flex">
-                     <div id="getPost"></div>
-                     <div id="coms"></div>
-                </div>
-                     <div id="getPostId"></div>
-                     <div id="getCommentaire"></div>
-                       <div id="formProfil">
-                            
-                         </div>
-
- </body>
-        <script src="index.js"></script>
-        </html>
+	<html lang="fr">
+		<head>
+			<meta charset='utf-8'>
+			<link rel="stylesheet" type="text/css" href="style.css">
+			<script src="https://kit.fontawesome.com/905de2e5b3.js" crossorigin="anonymous"></script>
+		</head>
+		<body id="bodyForum">
+			<header>
+				<ul id="listProfil">
+					<li><img class="logo" src="icon-left-font-monochrome-fgfgdgdf.png" title="logo de l'entreprise" alt="logo avec le nom de l'entreprise en blanc"></li>
+					<li class="deroulant">
+						
+						<a class="linkForum" href="#">Mon compte</a>
+						<ul class="sous">
+							<li class="deroulant" id="profilDeroulant">
+								<a href="#" onclick="buttonProfil()">Profil</a>
+								<li class="deroulant" id="returnProfil"><a href="#" onclick="returnProfil()">Retourner au menu principal</a></li>
+								<li><a href="#" onclick="deconnexion()">Déconnexion</a></li>
+								<li><a href="#" onclick="deleteUser()">Suppression du compte</a></li>
+							</ul>
+						</li>
+					</li>
+					<li><a id="post" class="linkForum" href="#" onclick="displayFormPost()">Poster</a></li>
+					
+				</ul>
+			</header>
+			<div id="divPost">
+				<a href="#" onclick="exitPostFile()"><i class="fas fa-times"></i></a>
+				<form class="formFile" method="POST"  enctype="multipart/form-data">
+					<label name="file">Fichier à partager</label>
+					<input  name="image" id="filePost" type="file">
+					<input type="button" onclick="post()" value="partager">
+				</form>
+			</div>
+			<div id="profilage"></div>
+			<div id="getPost"></div>
+			
+			<div id="formProfil"></div>
+		</body>
+		<script src="index.js"></script>
+	</html>

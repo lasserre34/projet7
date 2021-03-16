@@ -1,8 +1,69 @@
 #login{
     display: none;
 }
+#bodyForum{
+      
+    background-color:#263857 ;
+}
+
+#bodyPost{
+    background-color:#263857
+}
+#htmlBack{
+    background-image:url(./fontecran.png) ;
+    background-size: 100%
+}
 #signup{
     display: none;
+    text-align: center;
+    margin-left: 25% ; 
+    margin-right:25%;
+    border:solid black 2px;
+    padding-top: 2% ;
+    padding-bottom: 5%;
+    background-color:
+    #bebdb6 ;
+    margin-top: 5%;
+    color: #fdfdfd   ;
+    
+}
+
+#login{
+    display: none;
+    text-align: center;
+    margin-left: 25% ; 
+    margin-right:25%;
+    border:solid black 2px;
+    padding-top: 2% ;
+    padding-bottom: 5%;
+    background-color:
+    #bebdb6 ;
+    margin-top: 5%;
+    color: #fdfdfd   ;
+    
+}
+#validationSignup{
+    display:none ;
+}
+
+
+input{
+    margin-bottom: 3%;
+}
+.logoSignup{
+    width:90%
+}
+
+.fas{
+    padding-left: 80%;
+    font-size: 30px;
+
+    
+}
+.far{
+    padding-left:80%;
+font-size:20px;
+padding-top:3%;
 }
 
 #listProfil{
@@ -35,9 +96,10 @@ ul{
 }
 
 ul li{
-    float: left ; 
+     
     width:25% ; 
-    text-align: center ;
+
+    
 }
 
 ul::after {
@@ -49,13 +111,14 @@ clear: both ;
 a{
     display: block ; 
     text-decoration: none ;
-    color: black ; 
+    color:  #fdfdfd ; 
     border-bottom: 2px solid transparent;
-    padding: 10px 0px
+   
+    
 }
 a:hover{
-    color:orange;
-    border-bottom: 2px solid gold;
+    color:#bb4e56;
+   
 }
 
 .sous{
@@ -76,22 +139,26 @@ ul li:hover .sous{
 
 .sous a{
 padding: 10px ; 
-border-bottom: none ; 
+/*border-bottom: none ;*/ 
 }
 
 .sous a:hover{
- border-bottom: none;
+/* border-bottom: none;*/
  background-color: RGBa(200,200,200,0.1);
 }
 
 #getPost{
-    text-align: center ;
+     
+    margin-left:30% ; 
+    margin-right:25% ;
 }
 
 #returnProfil{
     display:none ; 
 }
-
+.linkForum{
+    font-size: 25px;
+}
 
 
 #formCommentaire{
@@ -100,4 +167,121 @@ border-bottom: none ;
 
 #lienPostCommentaire{
     display: none ;
+}
+
+#postGet{
+  
+
+    text-align: center;
+   /* width:400px;
+    height: 470px;*/
+    background-color:#bebdb6 ;
+    color: #0b2145 ;
+   
+    
+}
+.pseudoPost{
+    font-size: 22px;
+    padding-top: 3%;
+}
+
+#imagePost{
+    width:380px ;
+    height: 400px ;
+    border-radius: 20% ;
+    border: solid  #bb4e56;
+    
+}
+
+.logo{
+    width:100%
+}
+
+#lienCommentaire{
+    font-size: 20px;
+
+}
+
+#profilGet{
+    width:30% ;
+    text-align: center;
+   padding-top:3% ; 
+   padding-bottom: 3%;
+     background-color:#bebdb6 ;
+     color: #0b2145 ;
+    
+     
+}
+
+#updateProfil{
+    width:30% ;
+    text-align: center;
+   
+     background-color:#bebdb6 ;
+     color: #0b2145 ;
+    
+     padding-top: 3%;
+     padding-bottom: 3%;
+
+}
+
+#getPostId{
+    text-align: center;
+   
+    background-color:#bebdb6 ;
+    color: #0b2145 ;
+  
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
+#getCommentaire{
+
+    text-align: center;
+   
+    background-color:#bebdb6 ;
+    color: #0b2145 ;
+   
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
+#inputCom{
+    text-align: center;
+   
+    background-color:#bebdb6 ;
+    color: #0b2145 ;
+   
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-left:25% ; 
+    margin-right: 25%;
+}
+
+#comId{
+  
+    margin-left: 10%;
+    margin-right:10%;
+    margin-bottom: 5%;
+    border: solid #bb4e56 ;
+}
+
+#divPost{
+    text-align: center;
+   
+    background-color:#bebdb6 ;
+    color: #0b2145 ;
+   
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-left:25% ; 
+    margin-right: 25%;
+}
+
+.formFile{
+    padding-top:5%
 }

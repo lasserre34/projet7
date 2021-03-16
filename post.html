@@ -1,47 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-        <header>
-        <ul id="listProfil">
-            <li class="deroulant"><a href="#">Mon compte</a>
-               
-                 <ul class="sous">
-    
-                    <li class="deroulant" id="returnProfil"><a href="forum.html">Retourner au menu principal</a> 
-                    </li>
-                   <li><a href="index.html">Déconnexion</a></li>
-                   <li><a href="#" onclick="deleteUser()">Suppression du compte</a></li>
-                 </ul>
-                 </li>
-            </li>
-            
-        </ul>
-       </header>
-       <div id="divPost">
-        <form  method="POST"  enctype="multipart/form-data">
-            <label name="file">Fichier à partager</label>
-            <input  name="image" id="filePost" type="file">
-            <input type="button" onclick="post()" value="partager">
-        </form>
-    </div>
-            
-        <div id="profilage"></div>
-             <div id="getPost"></div>
-             
-             <div id="getPostId"></div>
-             <div id="getCommentaire">
-                
-             </div>
-             <form id="inputCom">
-            </form>
-               <div id="formProfil">
-                    
-                 </div>
-
-    </body>
-    <script src="post.js"></script>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://kit.fontawesome.com/905de2e5b3.js" crossorigin="anonymous"></script>
+	</head>
+	<body id="bodyPost">
+		
+	<div id="profilage"></div>
+	<div id="getPost"></div>
+	<div id="getPostId"></div>
+	<div id="getCommentaire"></div>
+	<form id="inputCom"></form>
+	<div id="formProfil"></div>
+</body>
+<script src="post.js"></script>
 </html>

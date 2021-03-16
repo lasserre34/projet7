@@ -1,4 +1,7 @@
 
+
+
+
 if(document.cookie.length == 0){
 
 }
@@ -13,9 +16,18 @@ function displaySignup() {
     document.getElementById('login').style.display = "none";
 
     // fait apparaitre "le formulaire d'inscription"
-    document.getElementById('signup').style.display = "block";
+  document.getElementById('signup').style.display = "block";
+  document.getElementById('body').style.background = "#263857" ; 
+  document.getElementById('link-signup').style.display = "none" ; 
+  document.getElementById('htmlBack').style.background = "none" ;
+  document.getElementById('link-login').style.display = "none" ;
 
 }
+ 
+ function exitSignup(){
+    document.location.href="index.html"
+    
+ }
 
 function displayLogin() {
     /* function appeler lors du click sur le lien "connexion" */
@@ -25,7 +37,10 @@ function displayLogin() {
 
     //fait apparaitre "le formulaire de connexion"
     document.getElementById('login').style.display = "block"
-
+    document.getElementById('body').style.background = "#263857" ; 
+    document.getElementById('link-signup').style.display = "none" ; 
+    document.getElementById('htmlBack').style.background = "none" ;
+    document.getElementById('link-login').style.display = "none" ;
 }
 
 /* tableau pour récuperer "le pseudo" lors de l'inscription qui sera utiliser lors de la création automatique 
@@ -51,10 +66,17 @@ function inscription() {
             console.log(response)
             pushPseudoProfile()
             /* si  les données de l'inscritpion on était enregistrer avec succées apel la function pour cré un profil par default */
+          document.getElementById('validationSignup').style.display= "block"  ;
+            displayLogin()
+           
 
         }
+        else{
+            var response = request.responseText
+            document.getElementById('erorSignup').innerHTML = response
+        }
     }
-
+    
     request.open("POST", "https://localhost:3000/api/auth/signup");
     request.setRequestHeader('Content-Type', 'application/json');
 
@@ -145,6 +167,10 @@ function connexion() {
 
             // fait apparaitre le menu deroulant "Mon compte" 
             document.getElementById('listProfil').style.display = "block";
+        }
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 401){
+            var response = JSON.parse(request.responseText);
+          console.log(response)
         }
     };
 

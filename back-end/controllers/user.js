@@ -73,7 +73,7 @@ exports.login = function(req, res) {
         User.verify(user,(err,data)=>{
 
             if (!user) {
-              return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+               res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
             data.forEach(element => {
                 
@@ -81,7 +81,7 @@ exports.login = function(req, res) {
             bcrypt.compare(req.body.password, element.password)
               .then(valid => {
                 if (!valid) {
-                  return res.status(401).json({ error: 'Mot de passe incorrect !' });
+                   res.status(401).json({ error: 'Mot de passe incorrect !' });
                 }
                 res.status(200).json({
                     data,

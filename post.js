@@ -5,7 +5,7 @@ if(document.length == 0){
 var cookie = document.cookie.split('token=')
  console.log(cookie[1])
 
-document.getElementById('returnProfil').style.display = "block";
+//document.getElementById('returnProfil').style.display = "block";
 
 var $_GET = [];
 var parts = window.location.search.substr(1).split("&");
@@ -21,7 +21,7 @@ getOnePost()
 var recupPost
 var postIdCom
 
-function getOnePost() {
+function getOnePost() {  
     var request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
@@ -32,9 +32,12 @@ function getOnePost() {
             recupPost = response
             recupPost.forEach(function(response, index) {
                 const postGetId = document.createElement('div')
-                postGetId.innerHTML = ` <p class="pseudoPost">Pseudo:${response.pseudo}</p>
+        
+                postGetId.innerHTML = `   <a href="#" onclick="exitPost()"><i class="fas fa-times"></i></a>
+                <a id="displayDelete" href="#" onclick="deletePost('${index}')"> <i class="fas fa-trash-alt"></i></a>
+                <p class="pseudoPost">Pseudo:${response.pseudo}</p>
         <img src="${response.file}"> 
-        <button  id="btnDeletePost" onclick="deletePost('${index}')">Supprimer le post</button>
+       
         
          `
                 postIdCom = response.postId
@@ -51,7 +54,9 @@ function getOnePost() {
 
     request.send();
 }
-
+function exitPost(){
+    document.location.href="forum.html"
+}
 var recupCommentairePost
 
 function commentairePost() {
@@ -77,10 +82,12 @@ function commentairePost() {
 
                     // console.log(recupCommentairePost.length)
                     const recupCommentaire = document.createElement('div')
+                    recupCommentaire.setAttribute("id" , "comId")
                     recupCommentaire.innerHTML = `
-     <p>${element.pseudo}</p>
-     <input  id="comments"type="texte" placeholder="${element.commentaire}">
-     <button id="btnDeleteCommentaire" onclick="deleteCommentaire(${index})">supprimer</button>
+                  <a href="#" id="btnDeleteCommentaire" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
+     <p>Pseudo:${element.pseudo}</p>
+     <input  id="commentModifyId${index}" type="texte" placeholder="${element.commentaire}">
+    
      <button id="btnModifyComments" onclick="modifyComments(${index})">modifier le commentaire</button>
      `
 
@@ -151,6 +158,7 @@ function valideCommentaire() {
     this.commentaire = JSON.stringify(this.objectCommentaire)
     //formData = new FormData()
     //formData.append("commentaire",this.commentaire )
+    console.log(this.objectCommentaire)
     request.send(this.commentaire);
 
 }
@@ -158,6 +166,7 @@ function valideCommentaire() {
 function modifyComments(index) {
     var commentsPostId = recupCommentairePost[index].id
     this.recupUserIdComments = recupCommentairePost[index].userId
+    console.log(document.getElementById('commentModifyId' + index).value)
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         /* requette PUT qui va envoyer a la BDD les modification apporter au commentaire */
@@ -174,9 +183,9 @@ function modifyComments(index) {
     request.open("PUT", "https://localhost:3000/api/post/commentaire/update/" + commentsPostId);
     request.setRequestHeader('Content-Type', 'application/json')
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
-
+      
     var commentsModify = {
-        commentaire: document.getElementById('comments').value,
+        commentaire: document.getElementById('commentModifyId' + index).value,
         userId: this.recupUserIdComments
 
     }
@@ -186,8 +195,10 @@ function modifyComments(index) {
 }
 
 
-
+console.log(recupCommentairePost)
 function deleteCommentaire(index) {
+    console.log(index)
+    console.log(recupCommentairePost)
     var idCommentaire = recupCommentairePost[index].id
     this.recupUserIdCommentaire = recupCommentairePost[index].userId
 

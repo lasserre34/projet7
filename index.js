@@ -56,8 +56,11 @@ function buttonProfil() {
                     element.description = "Ajouter une description"
                 }
                 const profilage = document.createElement('div')
+
                 profilage.innerHTML = ` <div id="profilGet">
+                <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <div id="divImageProfil">
+
                 <img src=${element.imageProfil}></div>
                 <p>Pseudo: ${element.pseudo}</p><br>
                 <p>Prenom: ${element.first_Name}</p><br>
@@ -67,12 +70,14 @@ function buttonProfil() {
                  </div>
 
                 <div id="updateProfil">
+                <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <form id="updateP"  method="POST"  enctype="multipart/form-data">
+                <p>Modifier votre image de Profil</p>
                <input name="image" id="imageUpdate" type="file" placeholder="${element.imageProfil}">
                <p>Nom: <input id="nomUpdate" type="texte" placeholder="${element.last_Name}"></p>
                <p>Prenom:<input id="updatePrenom" type="texte" placeholder="${element.first_Name}"></p>
                <p>Description<input id="descriptionUpdate" type="texte" placeholder="${element.description}"></p>
-               <p>Pseudo<input id="pseudoUpdate" type="texte" placeholder="${element.pseudo}"></p>"
+               <p>Pseudo<input id="pseudoUpdate" type="texte" placeholder="${element.pseudo}"></p>
                <button type="button" onclick="modifyProfil()">Valider les modification</button>
                </form>
                </div>
@@ -117,12 +122,15 @@ function buttonProfil() {
     request.send();
 }
 
+function exitProfil(){
+    document.location.href="forum.html"
+}
 function displayUpdateProfil() {
     /* function apeler lors du click sur le bouton Modifier votre Profil*/
     // fait apparaitre la div updateProfil
     document.getElementById("updateProfil").style.display = "block";
     // vide la div profil 
-    document.getElementById("profilGet").innerHTML = " ";
+    document.getElementById("profilGet").style.display = "none" ;
 
 }
 
@@ -309,8 +317,8 @@ function getALLpost() {
             recupPost.forEach((element, index) => {
                 const postGet = document.createElement('div')
                 postGet.innerHTML = `<div id="postGet">
-                     <p class="pseudoPost">${element.pseudo}</p>
-                     <img src="${element.file}"> 
+                     <p class="pseudoPost"> Pseudo: ${element.pseudo}</p>
+                     <img id="imagePost" src="${element.file}"> 
                      <form action="post.html">
                       <input type="hidden" name="${element.id}" value="${element.id}">
                        <button id="lienCommentaire" type="submit">${recupCom[index].nb_commentaire} commentaire: </button>
@@ -340,6 +348,10 @@ function getALLpost() {
    
     request.send();
 
+}
+
+function exitPostFile(){
+    document.location.href="forum.html"
 }
 
 // recupération de l'id dans l'url pour pouvoir faire une requette get rien qu'avec l'id du post selectionner

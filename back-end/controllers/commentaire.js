@@ -100,7 +100,7 @@ exports.UpdateCommentaire = function(req, res) {
         userId: req.body.userId,
         id: req.params.id
     }
-    if (!req.body.userId) {
+    if (!req.body.userId || !req.body.commentaire) {
         res.status(400).send({
             mesage: "err"
         })
