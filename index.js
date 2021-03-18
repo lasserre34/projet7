@@ -63,7 +63,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 const profilage = document.createElement('div')
 
                 profilage.innerHTML = ` <div id="profilGet">
-                <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
+                <a href="#" onclick="exitProfil()">exit<i class="fas fa-times"></i></a>
                 <div id="divImageProfil">
 
                 <img alt="image de profil" src=${element.imageProfil}></div>
@@ -77,12 +77,12 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 <div id="updateProfil">
                 <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <form id="updateP"  method="POST"  enctype="multipart/form-data">
-                <p>Modifier votre image de Profil</p>
+                <label name="image">Modifier votre image de Profil</label>
                <input name="image" alt="image de profil" id="imageUpdate" type="file" placeholder="${element.imageProfil}">
-               <p>Nom: <input id="nomUpdate" type="texte" placeholder="${element.last_Name}"></p>
-               <p>Prenom:<input id="updatePrenom" type="texte" placeholder="${element.first_Name}"></p>
-               <p>Description<input id="descriptionUpdate" type="texte" placeholder="${element.description}"></p>
-               <p>Pseudo<input id="pseudoUpdate" type="texte" placeholder="${element.pseudo}"></p>
+               <label name="lastName">Nom:</label> <input id="nomUpdate" name="lastName" type="texte" placeholder="${element.last_Name}">
+               <label name="prenom">Prenom:</label><input id="updatePrenom" name="prenom" type="texte" placeholder="${element.first_Name}">
+             
+               <label name="pseudo>Pseudo</label><input id="pseudoUpdate" name="pseudo" type="texte" placeholder="${element.pseudo}">
                <button type="button" onclick="modifyProfil()">Valider les modification</button>
                </form>
                </div>

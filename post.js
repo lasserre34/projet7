@@ -37,10 +37,10 @@ function getOnePost() {
             
                 const postGetId = document.createElement('div')
                
-                postGetId.innerHTML = `   <a href="#" onclick="exitPost()"><i class="fas fa-times"></i></a>
-                <a id="displayDeletePost" href="#" onclick="deletePost('${index}')"> <i class="fas fa-trash-alt"></i></a>
+                postGetId.innerHTML = `   <a href="#" alt="quitter la page" onclick="exitPost()"><i class="fas fa-times"></i></a>
+                <a id="displayDeletePost" href="#" alt="supprimer le post" onclick="deletePost('${index}')"><i class="fas fa-trash-alt"></i></a>
                 <p class="pseudoPost">Pseudo:${response.pseudo}</p>
-        <img id="filePost" src="${response.file}"> 
+        <img  alt="gif poster par ${response.pseudo}" id="filePost" src="${response.file}"> 
         `       
         
        
@@ -92,8 +92,8 @@ function commentairePost() {
                     const recupCommentaire = document.createElement('div')
                     recupCommentaire.setAttribute("id" , "comId")
                     recupCommentaire.innerHTML = `
-                  <a href="#" id="displayDeleteComment${index}" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
-                 <a href="#" id="displayModifyComment${index}" onclick="displayModify(${index})"> <i class="fas fa-pencil-alt"></i></a>
+                  <a href="#" alt="supprimer commentaire" id="displayDeleteComment${index}" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
+                 <a href="#" alt="modifier commentaire" id="displayModifyComment${index}" onclick="displayModify(${index})"> <i class="fas fa-pencil-alt"></i></a>
                <p>Pseudo:${element.pseudo}</p>
               <p class="comentWrap">${element.commentaire}</p>
               <section id="commentBlock${index}">
