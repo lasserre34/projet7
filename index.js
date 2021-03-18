@@ -80,7 +80,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
                <input name="image" alt="image de profil" id="imageUpdate" type="file" placeholder="${element.imageProfil}"><br>
                <label name="lastName">Nom:</label> <input id="nomUpdate" name="lastName" type="texte" placeholder="${element.last_Name}"><br>
                <label name="prenom">Prenom:</label><input id="updatePrenom" name="prenom" type="texte" placeholder="${element.first_Name}"><br>
-                <label  for="pseudoUpdate" name="pseudo>Pseudo></label><input id="pseudoUpdate" name="pseudo" type="texte" placeholder="${element.pseudo}"><br>
+                <label  for="pseudoUpdate" name="pseudo">Pseudo></label><input id="pseudoUpdate" name="pseudo" type="texte" placeholder="${element.pseudo}"><br>
                <button type="button" onclick="modifyProfil()">Valider les modification</button>
                </form>
                </div>
@@ -177,8 +177,7 @@ function modifyProfil() {
 
     this.nomUpdate = document.getElementById('nomUpdate').value;
 
-    this.descriptionUpdate = document.getElementById('descriptionUpdate').value;
-
+    
 
     this.imageUpdate = document.getElementById('imageUpdate').files[0];
 
@@ -195,9 +194,7 @@ function modifyProfil() {
     if (this.pseudoUpdate == "") {
         this.pseudoUpdate = tbltProfil[2]
     }
-    if (this.descriptionUpdate == "") {
-        this.descriptionUpdate = tbltProfil[3]
-    }
+   
 
 
 
