@@ -97,6 +97,7 @@ function commentairePost() {
                <p>Pseudo:${element.pseudo}</p>
               <p class="comentWrap">${element.commentaire}</p>
               <section id="commentBlock${index}">
+              <label for="commentModifyId${index} name="commentaire"></label>
            <textarea  id="commentModifyId${index}" type="texte" placeholder="${element.commentaire}"></textarea>
            <button id="btnModifyComments${index}" onclick="modifyComments(${index})">modifier le commentaire</button>
            </section>
@@ -119,7 +120,7 @@ function commentairePost() {
             const inputCommentaire = `
             
            
-     <label name="com">Commentaire:</label><br>
+     <label for="com" name="com">Commentaire:</label><br>
     <textarea type="texte" name="com" id="com"></textarea><br>
     </form>
    <button type="button" onclick="valideCommentaire()">Envoyer votre commentaire</button>
