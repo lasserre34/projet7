@@ -322,6 +322,28 @@ padding: 10px ;
 #logoPost{
     width:100%;
 }
+
+#link-signup{
+    color: #bb4e56 ;
+    font-size: 22px;
+    margin-bottom: 3%;
+   
+}
+#link-signup:hover{
+    border-bottom: solid #bb4e56;
+    width:15%
+}
+#link-login{
+    color: #bb4e56 ;
+    font-size: 22px;
+    margin-bottom: 3%;
+   
+}
+#link-login:hover{
+    border-bottom: solid #bb4e56;
+    width:15%
+}
+
 @media screen and (max-width:800px){
     #htmlBack{
         background-size: 800px 1280px ;
