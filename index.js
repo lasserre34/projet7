@@ -6,12 +6,14 @@ if(document.cookie.length == 0){
 console.log(document.cookie.length)
 var cookie = document.cookie.split('token=')
 getALLpost()
+ 
 
-
-
+function deroulant(){
+    document.getElementById('deroulantBlock').style.display="block"
+}
 function returnProfil() {
     /*function apeler lors du click sur le lien "Retourner au menu principal"  */
-
+    document.getElementById('deroulantBlock').style.display="none" ;
     //fait disparaitre le lien "Retourner au menu principal"
     document.getElementById('returnProfil').style.display = "none"
     // fait aparaitre le lien "profil"
@@ -25,7 +27,10 @@ let tbltProfil = []
 
 function buttonProfil() {
     /*function appeler lors du click sur le lien profil */
+document.getElementById('deroulantBlock').style.display="none" ; 
 
+
+ 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         /* requette GET qui recupere les données de la table profil via le pseudo de l'utilisateur*/
@@ -91,7 +96,9 @@ function buttonProfil() {
                 document.getElementById('profilage').appendChild(profilage)
                 // ne fait pas aparaitre la div uptdateProfil 
                 document.getElementById('updateProfil').style.display = "none";
-
+               // 
+               document.getElementById('profilGet').style.width="auto" ; 
+               
                 // element du profil push dans le tableaux pour recuperer pour la fonction updateProfil 
 
                 var first_Name = element.first_Name
@@ -131,7 +138,8 @@ function displayUpdateProfil() {
     document.getElementById("updateProfil").style.display = "block";
     // vide la div profil 
     document.getElementById("profilGet").style.display = "none" ;
-
+   //
+   document.getElementById('updateProfil').style.width= "auto" ;
 }
 
 function modifyProfil() {

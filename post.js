@@ -1,3 +1,4 @@
+
 // recupération du cookie 
 if(document.length == 0){
   document.location.href="index.html"
@@ -31,17 +32,24 @@ function getOnePost() {
            
             recupPost = response
             recupPost.forEach(function(response, index) {
+            
+                 
+            
                 const postGetId = document.createElement('div')
-        
+               
                 postGetId.innerHTML = `   <a href="#" onclick="exitPost()"><i class="fas fa-times"></i></a>
-                <a id="displayDelete" href="#" onclick="deletePost('${index}')"> <i class="fas fa-trash-alt"></i></a>
+                <a id="displayDeletePost" href="#" onclick="deletePost('${index}')"> <i class="fas fa-trash-alt"></i></a>
                 <p class="pseudoPost">Pseudo:${response.pseudo}</p>
-        <img src="${response.file}"> 
-       
+        <img id="filePost" src="${response.file}"> 
+        `       
         
-         `
+       
                 postIdCom = response.postId
                 document.getElementById('getPostId').appendChild(postGetId)
+
+                if(response.userId == localStorage.getItem("userId")){
+                    document.getElementById('displayDeletePost').style.display= "block" ; 
+                }
             })
             commentairePost()
         }
@@ -84,23 +92,38 @@ function commentairePost() {
                     const recupCommentaire = document.createElement('div')
                     recupCommentaire.setAttribute("id" , "comId")
                     recupCommentaire.innerHTML = `
-                  <a href="#" id="btnDeleteCommentaire" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
-     <p>Pseudo:${element.pseudo}</p>
-     <input  id="commentModifyId${index}" type="texte" placeholder="${element.commentaire}">
-    
-     <button id="btnModifyComments" onclick="modifyComments(${index})">modifier le commentaire</button>
+                  <a href="#" id="displayDeleteComment${index}" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
+                 <a href="#" id="displayModifyComment${index}" onclick="displayModify(${index})"> <i class="fas fa-pencil-alt"></i></a>
+               <p>Pseudo:${element.pseudo}</p>
+              <p class="comentWrap">${element.commentaire}</p>
+              <section id="commentBlock${index}">
+           <textarea  id="commentModifyId${index}" type="texte" placeholder="${element.commentaire}"></textarea>
+           <button id="btnModifyComments${index}" onclick="modifyComments(${index})">modifier le commentaire</button>
+           </section>
      `
 
                     document.getElementById('getCommentaire').appendChild(recupCommentaire);
+                    if(element.userId == localStorage.getItem('userId')){
+                     document.getElementById('displayDeleteComment' + index).style.display= "block"
+                     document.getElementById('displayModifyComment' + index).style.display="block"
 
+                    }else{
+                        document.getElementById('displayDeleteComment' + index).style.display= "none" ; 
+                        document.getElementById('displayModifyComment' + index).style.display="none" ;
+                    }
+                    
+                    
+                     document.getElementById('commentBlock' + index).style.display= "none" ;
                 })
             }
             const inputCommentaire = `
- <label name="com">Commentaire:</label>
- <input type="texte" name="com" id="com">
- 
-    <button type="button" onclick="valideCommentaire()">Envoyer votre commentaire</button>
-        `
+            
+           
+     <label name="com">Commentaire:</label><br>
+    <textarea type="texte" name="com" id="com"></textarea><br>
+    </form>
+   <button type="button" onclick="valideCommentaire()">Envoyer votre commentaire</button>
+ `
             document.getElementById('inputCom').innerHTML = inputCommentaire
 
         };
@@ -118,7 +141,10 @@ function commentairePost() {
     request.send();
 
 }
-
+function displayModify(index){
+    document.getElementById('commentBlock' + index).style.display= "block" ; 
+    console.log("okoko")
+}
 function valideCommentaire() {
     /* function appler lors du click sur  le button "valider commentaire"*/
 
@@ -175,6 +201,7 @@ function modifyComments(index) {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
             var response = JSON.parse(request.responseText);
             console.log(response)
+            commentairePost()
         }
     }
     const tokens = sessionStorage.getItem('token')

@@ -3,15 +3,18 @@
 		<head>
 			<meta charset='utf-8'>
 			<link rel="stylesheet" type="text/css" href="style.css">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<script src="https://kit.fontawesome.com/905de2e5b3.js" crossorigin="anonymous"></script>
 		</head>
 		<body id="bodyForum">
 			<header>
 				<ul id="listProfil">
 					<li><img class="logo" src="icon-left-font-monochrome-fgfgdgdf.png" title="logo de l'entreprise" alt="logo avec le nom de l'entreprise en blanc"></li>
-					<li class="deroulant">
+					
+					<li  id="deroulant" class="deroulant">
 						
-						<a class="linkForum" href="#">Mon compte</a>
+						<a class="linkForum" href="#" onclick="deroulant()">Mon compte</a>
+						<div id="deroulantBlock">
 						<ul class="sous">
 							<li class="deroulant" id="profilDeroulant">
 								<a href="#" onclick="buttonProfil()">Profil</a>
@@ -20,7 +23,7 @@
 								<li><a href="#" onclick="deleteUser()">Suppression du compte</a></li>
 							</ul>
 						</li>
-					</li>
+					</div>
 					<li><a id="post" class="linkForum" href="#" onclick="displayFormPost()">Poster</a></li>
 					
 				</ul>
@@ -33,9 +36,10 @@
 					<input type="button" onclick="post()" value="partager">
 				</form>
 			</div>
+			<div id="flex">
 			<div id="profilage"></div>
 			<div id="getPost"></div>
-			
+			</div>
 			<div id="formProfil"></div>
 		</body>
 		<script src="index.js"></script>

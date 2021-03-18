@@ -21,6 +21,8 @@ function displaySignup() {
   document.getElementById('link-signup').style.display = "none" ; 
   document.getElementById('htmlBack').style.background = "none" ;
   document.getElementById('link-login').style.display = "none" ;
+  document.getElementById('signupLogin').style.display="none" ;
+  document.getElementById('image-responsive').style.display="none" ; 
 
 }
  
@@ -41,6 +43,8 @@ function displayLogin() {
     document.getElementById('link-signup').style.display = "none" ; 
     document.getElementById('htmlBack').style.background = "none" ;
     document.getElementById('link-login').style.display = "none" ;
+    document.getElementById('signupLogin').style.display="none" ;
+    document.getElementById('image-responsive').style.display="none";
 }
 
 /* tableau pour récuperer "le pseudo" lors de l'inscription qui sera utiliser lors de la création automatique 

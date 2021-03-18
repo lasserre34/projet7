@@ -24,7 +24,8 @@
     "mysql": "^2.18.1",
     "openssl": "^1.1.0",
     "openssl-nodejs": "^1.0.5",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

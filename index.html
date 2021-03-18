@@ -5,46 +5,52 @@
 		<head>
 			<meta charset='utf-8'>
 			<link rel="stylesheet" type="text/css" href="style.css">
+			<link rel="shortcut icon" type="image/png" href="https://localhost:3000/images/icon.png">
             <script src="https://kit.fontawesome.com/905de2e5b3.js" crossorigin="anonymous"></script>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
 		</head>
 		<body id="body">
             <div id="container">
 			<header>
+				<div id="image-responsive">
+				<img  class="image-responsive" src="icon-left-font-monochrome-fgfgdgdf.png">
+				</div>
 				<div id="signupLogin">
-					<a id="link-signup" href="#" onclick="displaySignup()">inscription</a><a id="link-login" href="#" onclick="displayLogin()">connexion</a>
 					
-					<div id="signup">
-                        <a href="#" onclick="exitSignup()"><i class="fas fa-times"></i></a>
-						<form name="signup">
-                           <img class="logoSignup" src="icon-left-font-monochrome-fgfgdgdf.png"  title="logo groupomania" alt="logo groupomania blanc"><br>
-                           <p id="erorSignup"></p>
-                           <label for="email">Email:</label><br>
-							<input id="emailSignup" type="email" name="email"><br>
-							<label for="password">Password:</label><br>
-							<input  id="passwordSignup" type="password" name="password"><br>
-							<label for="pseudo">Pseudo:</label><br>
-							<input id="pseudoSignup" type="texte" name="pseudo"><br>
-							<button  onclick="inscription()" type="button">Inscription</button>
-						</form>
-					</div>
-					<div id="login">
-                        <a href="#" onclick="exitSignup()"><i class="fas fa-times"></i></a>
-						<form name="login" post="/login">
-                            <img class="logoSignup" src="icon-left-font-monochrome-fgfgdgdf.png"  title="logo groupomania" alt="logo groupomania blanc"><br>
-							<p id="validationSignup">Votre inscription a bien était valider <br> vous pouvez vous connecter</p>
-                          
-                            <label name="email">email</label><br>
-
-
-							<input  id="emailLogin" type="email" name="email"><br>
-							<label name="password">password</label><br>
-							<input id="passwordLogin" type="password" name="password"><br>
-							<button type="button" onclick="connexion()">connexion</button>
-						</form>
-					</div>
+					<a id="link-signup" href="#" onclick="displaySignup()">Inscription</a><a id="link-login" href="#" onclick="displayLogin()">Connexion</a>
+					
+				
 				</div>
 			</header>
-			
+			<div id="signup">
+				<a href="#" onclick="exitSignup()"><i class="fas fa-times"></i></a>
+				<form name="signup">
+				   <img class="logoSignup" src="icon-left-font-monochrome-fgfgdgdf.png"  title="logo groupomania" alt="logo groupomania blanc"><br>
+				   <p id="erorSignup"></p>
+				   <label for="email">Email:</label><br>
+					<input id="emailSignup" type="email" name="email"><br>
+					<label for="password">Password:</label><br>
+					<input  id="passwordSignup" type="password" name="password"><br>
+					<label for="pseudo">Pseudo:</label><br>
+					<input id="pseudoSignup" type="texte" name="pseudo"><br>
+					<button  onclick="inscription()" type="button">Inscription</button>
+				</form>
+			</div>
+			<div id="login">
+				<a href="#" onclick="exitSignup()"><i class="fas fa-times"></i></a>
+				<form name="login" post="/login">
+					<img class="logoSignup" src="icon-left-font-monochrome-fgfgdgdf.png"  title="logo groupomania" alt="logo groupomania blanc"><br>
+					<p id="validationSignup">Votre inscription a bien était valider <br> vous pouvez vous connecter</p>
+				  
+					<label name="email">email</label><br>
+
+
+					<input  id="emailLogin" type="email" name="email"><br>
+					<label name="password">password</label><br>
+					<input id="passwordLogin" type="password" name="password"><br>
+					<button type="button" onclick="connexion()">connexion</button>
+				</form>
+			</div>
        
             </div>
         </body>
