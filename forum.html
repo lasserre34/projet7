@@ -1,10 +1,11 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 	<html lang="fr">
 		<head>
 			<meta charset='utf-8'>
 			<link rel="stylesheet" type="text/css" href="style.css">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<script src="https://kit.fontawesome.com/905de2e5b3.js" crossorigin="anonymous"></script>
+			<title>Page Forum Groupomania</title>
 		</head>
 		<body id="bodyForum">
 			<header>
@@ -29,9 +30,9 @@
 				</ul>
 			</header>
 			<div id="divPost">
-				<a href="#" onclick="exitPostFile()"><i class="fas fa-times"></i></a>
+				<a href="#" onclick="exitPostFile()">exit<i class="fas fa-times"></i></a>
 				<form class="formFile" method="POST"  enctype="multipart/form-data">
-					<label name="file">Fichier à partager</label>
+					<label name="image">Fichier à partager</label>
 					<input  name="image" id="filePost" type="file">
 					<input type="button" onclick="post()" value="partager">
 				</form>

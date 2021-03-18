@@ -66,7 +66,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <div id="divImageProfil">
 
-                <img src=${element.imageProfil}></div>
+                <img alt="image de profil" src=${element.imageProfil}></div>
                 <p>Pseudo: ${element.pseudo}</p><br>
                 <p>Prenom: ${element.first_Name}</p><br>
                 <p>Nom: ${element.last_Name}</p><br>
@@ -78,7 +78,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <form id="updateP"  method="POST"  enctype="multipart/form-data">
                 <p>Modifier votre image de Profil</p>
-               <input name="image" id="imageUpdate" type="file" placeholder="${element.imageProfil}">
+               <input name="image" alt="image de profil" id="imageUpdate" type="file" placeholder="${element.imageProfil}">
                <p>Nom: <input id="nomUpdate" type="texte" placeholder="${element.last_Name}"></p>
                <p>Prenom:<input id="updatePrenom" type="texte" placeholder="${element.first_Name}"></p>
                <p>Description<input id="descriptionUpdate" type="texte" placeholder="${element.description}"></p>
@@ -326,7 +326,7 @@ function getALLpost() {
                 const postGet = document.createElement('div')
                 postGet.innerHTML = `<div id="postGet">
                      <p class="pseudoPost"> Pseudo: ${element.pseudo}</p>
-                     <img id="imagePost" src="${element.file}"> 
+                     <img alt="gif poster par ${element.pseudo}" id="imagePost" src="${element.file}"> 
                      <form action="post.html">
                       <input type="hidden" name="${element.id}" value="${element.id}">
                        <button id="lienCommentaire" type="submit">${recupCom[index].nb_commentaire} commentaire: </button>
