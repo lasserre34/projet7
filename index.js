@@ -78,11 +78,11 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 <a href="#" onclick="exitProfil()"><i class="fas fa-times"></i></a>
                 <form id="updateP"  method="POST"  enctype="multipart/form-data">
                 <label name="image">Modifier votre image de Profil</label>
-               <input name="image" alt="image de profil" id="imageUpdate" type="file" placeholder="${element.imageProfil}">
-               <label name="lastName">Nom:</label> <input id="nomUpdate" name="lastName" type="texte" placeholder="${element.last_Name}">
-               <label name="prenom">Prenom:</label><input id="updatePrenom" name="prenom" type="texte" placeholder="${element.first_Name}">
+               <input name="image" alt="image de profil" id="imageUpdate" type="file" placeholder="${element.imageProfil}"><br>
+               <label name="lastName">Nom:</label> <input id="nomUpdate" name="lastName" type="texte" placeholder="${element.last_Name}"><br>
+               <label name="prenom">Prenom:</label><input id="updatePrenom" name="prenom" type="texte" placeholder="${element.first_Name}"><br>
              
-               <label name="pseudo>Pseudo</label><input id="pseudoUpdate" name="pseudo" type="texte" placeholder="${element.pseudo}">
+               <label  for="pseudoUpdate" name="pseudo>Pseudo</label><input id="pseudoUpdate" name="pseudo" type="texte" placeholder="${element.pseudo}"><br>
                <button type="button" onclick="modifyProfil()">Valider les modification</button>
                </form>
                </div>
