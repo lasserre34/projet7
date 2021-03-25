@@ -5,8 +5,12 @@ const app = express();
 const mysql = require('mysql');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const sqlinjection = require("nps-sql-injection");
+const expressSanitizer = require('express-sanitizer');
 const dotenv = require('dotenv').config() ; 
 
+app.use(express.json());
+app.use(expressSanitizer());
 
 const userRoute = require("./routes/user");
 const profilRoute = require("./routes/profil");
@@ -35,6 +39,7 @@ db.connect(function(err) {
     next();
   });
   
+
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000 ,
     max: 1000
@@ -43,6 +48,7 @@ db.connect(function(err) {
     windowMs: 15 * 60 * 1000 ,
     max: 500 
   })
+  app.use(sqlinjection);
   app.use(helmet()) ; 
   app.use(limiter);
   

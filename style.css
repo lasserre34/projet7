@@ -172,10 +172,10 @@ a{
    
     
 }
-a:hover{
-    color:#bb4e56;
+
+  
    
-}
+
 #deroulantBlock{
     display: none;
 }
@@ -391,7 +391,7 @@ padding: 10px ;
 }
 
 #link-signup{
-    color: #bb4e56 ;
+    color: white;
     font-size: 22px;
     margin-bottom: 3%;
    
@@ -401,7 +401,7 @@ padding: 10px ;
     width:15%
 }
 #link-login{
-    color: #bb4e56 ;
+    color: white ;
     font-size: 22px;
     margin-bottom: 3%;
    
