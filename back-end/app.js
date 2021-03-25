@@ -5,7 +5,7 @@ const app = express();
 const mysql = require('mysql');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const sqlinjection = require("nps-sql-injection");
+
 const expressSanitizer = require('express-sanitizer');
 const dotenv = require('dotenv').config() ; 
 
@@ -48,7 +48,7 @@ db.connect(function(err) {
     windowMs: 15 * 60 * 1000 ,
     max: 500 
   })
-  app.use(sqlinjection);
+  
   app.use(helmet()) ; 
   app.use(limiter);
   
