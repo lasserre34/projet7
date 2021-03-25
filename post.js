@@ -1,4 +1,5 @@
 
+
 // recupération du cookie 
 if(document.length == 0){
   document.location.href="index.html"
@@ -39,7 +40,10 @@ function getOnePost() {
                
                 postGetId.innerHTML = `   <a href="#" alt="quitter la page" onclick="exitPost()"><i class="fas fa-times"></i></a>
                 <a id="displayDeletePost" href="#" alt="supprimer le post" onclick="deletePost('${index}')"><i class="fas fa-trash-alt"></i></a>
-                <p class="pseudoPost">Pseudo:${response.pseudo}</p>
+                <form action="forum.html">
+                <input type="hidden" name="${response.userId}" value="${response.userId}">
+                     <button type="submit" class="pseudoPost"> Pseudo: ${response.pseudo}</button>
+                     </form>
         <img  alt="gif poster par ${response.pseudo}" id="filePost" src="${response.file}"> 
         `       
         
@@ -47,6 +51,9 @@ function getOnePost() {
                 postIdCom = response.postId
                 document.getElementById('getPostId').appendChild(postGetId)
 
+                if(localStorage.getItem('admin') == 1){
+                    document.getElementById('displayDeletePost').style.display="block"
+                }
                 if(response.userId == localStorage.getItem("userId")){
                     document.getElementById('displayDeletePost').style.display= "block" ; 
                 }
@@ -92,23 +99,31 @@ function commentairePost() {
                     const recupCommentaire = document.createElement('div')
                     recupCommentaire.setAttribute("id" , "comId")
                     recupCommentaire.innerHTML = `
-                  <a href="#" alt="supprimer commentaire" id="displayDeleteComment${index}" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
-                 <a href="#" alt="modifier commentaire" id="displayModifyComment${index}" onclick="displayModify(${index})"> <i class="fas fa-pencil-alt"></i></a>
-               <p>Pseudo:${element.pseudo}</p>
-              <p class="comentWrap">${element.commentaire}</p>
+                    <form action="forum.html">
+                    <input type="hidden" name="${element.userId}" value="${element.userId}">
+                         <button type="submit" class="pseudoCom"> Pseudo: ${element.pseudo}</button><a href="#" alt="supprimer commentaire" id="displayDeleteComment${index}" onclick="deleteCommentaire(${index})"> <i class="far fa-trash-alt"></i></a>
+                         <a href="#" alt="modifier commentaire" id="displayModifyComment${index}" onclick="displayModify(${index})"> <i class="fas fa-pencil-alt"></i></a>
+                         </form>
+                   <p class="comentWrap">${element.commentaire}</p>
               <section id="commentBlock${index}">
               <label for="commentModifyId${index} name="commentaire"></label>
            <textarea  id="commentModifyId${index}" type="texte" placeholder="${element.commentaire}"></textarea>
            <button id="btnModifyComments${index}" onclick="modifyComments(${index})">modifier le commentaire</button>
            </section>
-     `
+     `             
 
                     document.getElementById('getCommentaire').appendChild(recupCommentaire);
+
+                  
+
                     if(element.userId == localStorage.getItem('userId')){
                      document.getElementById('displayDeleteComment' + index).style.display= "block"
                      document.getElementById('displayModifyComment' + index).style.display="block"
-
-                    }else{
+        
+                    } else if(localStorage.getItem('admin') == 1){
+                        document.getElementById('displayDeleteComment' + index).style.display=" block" 
+                    }
+                    else{
                         document.getElementById('displayDeleteComment' + index).style.display= "none" ; 
                         document.getElementById('displayModifyComment' + index).style.display="none" ;
                     }
@@ -134,9 +149,6 @@ function commentairePost() {
 
     request.open("GET", "https://localhost:3000/api/post/commentaire/" + postId);
     request.setRequestHeader('Content-Type', 'application/json');
-    const tokens = sessionStorage.getItem('token')
-
-    var token = JSON.parse(tokens)
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
 
     request.send();

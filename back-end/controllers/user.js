@@ -65,14 +65,17 @@ exports.pushUserIdProfil = function(req, res) {
 }
 /* Connexion */
 exports.login = function(req, res) {
+  
     const user = {
         email: req.body.email  
        
     }
+    
         // verifie si l'email est dans la base de donnée
         User.verify(user,(err,data)=>{
-
-            if (!user) {
+              
+          
+            if(data == 0) {
                res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }
             data.forEach(element => {
@@ -80,8 +83,8 @@ exports.login = function(req, res) {
         
             bcrypt.compare(req.body.password, element.password)
               .then(valid => {
-                if (!valid) {
-                   res.status(401).json({ error: 'Mot de passe incorrect !' });
+                if(!valid) {
+                   res.status(400).json({ error: 'Mot de passe incorrect !' });
                 }
                 res.status(200).json({
                     data,

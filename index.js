@@ -7,6 +7,22 @@ console.log(document.cookie.length)
 var cookie = document.cookie.split('token=')
 getALLpost()
  
+// récupération de luserId du l'utilisateur qui a poster le gif pour pouvoir afficher son profil
+var $_GET = [];
+var parts = window.location.search.substr(1).split("&");
+for (var i = 0; i < parts.length; i++) {
+    var temp = parts[i].split("=");
+    console.log(temp)
+}
+temp.pop()
+console.log(temp);
+var postId = temp[0]
+if (temp[0] == null){
+    console.log('cest null')
+}
+else{
+    getProfilUserPost()
+}
 
 function deroulant(){
     document.getElementById('deroulantBlock').style.display="block"
@@ -23,6 +39,72 @@ function returnProfil() {
 }
 // tableaux pour récuperer les element du profil ; 
 let tbltProfil = []
+
+function getProfilUserPost(){
+
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        /* requette GET qui recupere les données de la table profil via le pseudo de l'utilisateur*/
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            var response = JSON.parse(request.responseText);
+            console.log(response)
+           
+            var profilUser = response.data;
+
+            document.getElementById('profilage').innerHTML = "";
+            profilUser.forEach(element => {
+
+
+                if (element.first_Name == null) {
+                    element.first_Name = "Ajouter un prenom"
+                }
+                if (element.last_Name == null) {
+                    element.last_Name = "Ajouter un nom"
+                }
+                if (element.description == null) {
+                    element.description = "Ajouter une description"
+                }
+                const profilage = document.createElement('div')
+
+                profilage.innerHTML = ` <div id="profilGetUser">
+                <a href="#" onclick="exitProfil()">exit<i class="fas fa-times"></i></a>
+                <div id="divImageProfil">
+
+                <img alt="image de profil" src=${element.imageProfil}></div>
+                <p>Pseudo: ${element.pseudo}</p><br>
+                <p>Prenom: ${element.first_Name}</p><br>
+                <p>Nom: ${element.last_Name}</p><br>
+                <button id="btnSuprimerCompte" type="button" onclick="deleteUserAdmin()">Supprimer le compte</button> 
+                 </div>
+
+               
+             `
+
+
+
+                // fait apparaitre la div profilage 
+                document.getElementById('profilage').style.display = "block"
+                // afiche la const profilage in html
+                document.getElementById('profilage').appendChild(profilage)
+            
+               console.log(localStorage.getItem('admin') == 1)
+               if(localStorage.getItem('admin') == 1){
+                   document.getElementById('btnSuprimerCompte').style.display= "block" 
+               }
+            })
+
+        }
+    };
+    
+    
+    request.open("GET", "https://localhost:3000/api/profil/getprofiluser/" + postId);
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
+    request.send();
+}
+
+
 
 
 function buttonProfil() {
@@ -119,8 +201,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
     
     
     const userIdProfil = localStorage.getItem('userId')
-    const tokens = sessionStorage.getItem('token')
-    var token = JSON.parse(tokens)
+  
     request.open("GET", "https://localhost:3000/api/profil/getprofil/" + userIdProfil);
     request.setRequestHeader('Content-Type', 'application/json')
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
@@ -153,9 +234,9 @@ function modifyProfil() {
             console.log(response)
             tbltPseudo = []
             tbltPseudo.push(response)
-            sessionStorage.setItem('pseudo', response)
             document.getElementById('getPost').innerHTML = "";
             localStorage.setItem('pseudo' , document.getElementById('pseudoUpdate').value)
+            buttonProfil()
             getALLpost()
 
 
@@ -164,8 +245,7 @@ function modifyProfil() {
     const userIdProfil = localStorage.getItem('userId')
 
     request.open("PUT", "https://localhost:3000/api/updateprofil/" + userIdProfil);
-    const tokens = sessionStorage.getItem('token')
-    var token = JSON.parse(tokens)
+    
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
 
     // Récuperation des valeurs du formulaire 
@@ -265,9 +345,7 @@ function post() {
     };
 
     request.open("POST", "https://localhost:3000/api/post");
-    const tokens = sessionStorage.getItem('token')
-
-    var token = JSON.parse(tokens)
+  
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
 
     this.userIdPostAuth = {
@@ -306,8 +384,7 @@ function getALLpost() {
         /* requette GET qui affiche tout les post in html */
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             var response = JSON.parse(this.responseText);
-            var tbltConcat = [];
-
+          
             reversePost = response.post
             recupPost = reversePost.reverse()
             reverseCom = response.com
@@ -320,7 +397,10 @@ function getALLpost() {
             recupPost.forEach((element, index) => {
                 const postGet = document.createElement('div')
                 postGet.innerHTML = `<div id="postGet">
-                     <p class="pseudoPost"> Pseudo: ${element.pseudo}</p>
+                <form action="forum.html">
+                <input type="hidden" name="${element.userId}" value="${element.userId}">
+                     <button type="submit" class="pseudoPost"> Pseudo: ${element.pseudo}</button>
+                     </form>
                      <img alt="gif poster par ${element.pseudo}" id="imagePost" src="${element.file}"> 
                      <form action="post.html">
                       <input type="hidden" name="${element.id}" value="${element.id}">
@@ -373,8 +453,7 @@ function deleteUser() {
         }
     };
 
-    const tokens = sessionStorage.getItem('token')
-    var token = JSON.parse(tokens)
+  
     request.open("DELETE", "https://localhost:3000/api/auth/deleteuser");
     request.setRequestHeader('Content-Type', 'application/json')
     request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
@@ -385,6 +464,38 @@ function deleteUser() {
     var objectDelete = {
 
         userId: userIdDelete
+    }
+    var deleteUser = JSON.stringify(objectDelete)
+    //formData = new FormData()
+    //formData.append('userDelete', this.deleteUser )
+    request.send(deleteUser);
+
+}
+
+function deleteUserAdmin() {
+    /* function apeler lors du click surl le lien "supprimer mon compte"*/
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        /* requette post envoyant le pseudo de l'utilisateur peremtant de lui crée un profil par default */
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            var response = JSON.parse(request.responseText);
+           
+           document.location.href="forum.html"
+           
+        }
+    };
+
+    
+    request.open("DELETE", "https://localhost:3000/api/auth/deleteuser/" + postId);
+    request.setRequestHeader('Content-Type', 'application/json')
+    request.setRequestHeader('Authorization', ` Bearer ${cookie[1]}`);
+
+    
+    
+    var objectDelete = {
+
+        userId: postId
     }
     var deleteUser = JSON.stringify(objectDelete)
     //formData = new FormData()

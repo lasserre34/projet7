@@ -149,7 +149,7 @@ function connexion() {
                                pour servir lors de la requette getprofil */
                 localStorage.setItem("pseudo", element.pseudo);
                 localStorage.setItem("userId", element.userId);
-            
+                localStorage.setItem('admin' , element.admin )
                
                 sessionStorage.setItem("token", JSON.stringify(response.token))
                 tbltUserId.push(element.userId)
@@ -172,10 +172,16 @@ function connexion() {
             // fait apparaitre le menu deroulant "Mon compte" 
             document.getElementById('listProfil').style.display = "block";
         }
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 401){
-            var response = JSON.parse(request.responseText);
-          console.log(response)
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 401){
+            document.getElementById("userError").style.display="block"
+            document.getElementById('passwordError').style.display="none" ;
+         }
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 400){
+         
+          document.getElementById("passwordError").style.display="block"
+          document.getElementById('userError').style.display="none"
         }
+
     };
 
 

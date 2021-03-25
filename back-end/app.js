@@ -41,7 +41,7 @@ db.connect(function(err) {
   })
   const limiterLogin = rateLimit({
     windowMs: 15 * 60 * 1000 ,
-    max: 20 
+    max: 500 
   })
   app.use(helmet()) ; 
   app.use(limiter);

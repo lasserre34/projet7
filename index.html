@@ -12,7 +12,7 @@
 		</head>
 		<body id="body">
             <div id="container">
-			<header>
+			<header id="headIndex">
 				<div id="image-responsive">
 				<img  class="image-responsive" src="icon-left-font-monochrome-fgfgdgdf.png">
 				</div>
@@ -42,7 +42,8 @@
 				<form name="login" post="/login">
 					<img class="logoSignup" src="icon-left-font-monochrome-fgfgdgdf.png"  title="logo groupomania" alt="logo groupomania blanc"><br>
 					<p id="validationSignup">Votre inscription a bien était valider <br> vous pouvez vous connecter</p>
-				  
+				    <p id="passwordError">Votre mot de passe est erroné</p>
+					<p id="userError">l'utilisateur n'existe pas</p>
 					<label for="emailLogin" name="email">Email</label><br>
 
 
@@ -52,8 +53,26 @@
 					<button type="button" onclick="connexion()">Connexion</button>
 				</form>
 			</div>
-       
-            </div>
+        </div>
+		<main>
+       <article>
+		  
+		   <h1>RESEAU SOCIAL GROUPOMANIA</h1>
+		   <p class="presentation">La direction a promis des mesures d’
+			amélioration de la communication entre collègues,<br>
+			entre autres un nouveau projet numérique.<br> Il s
+			’
+			agit de la création d’
+			un réseau social interne,<br>
+			moderne et ludique, qui permettra aux employés de se connaître dans un cadre plus
+			informel.</p>
+		   
+		   
+	   </article>
+		</main>
+			<footer>
+				<img id="footer" alt="logo de l'entreprise Groupomania" src="icon-left-font-monochrome-fgfgdgdf.png">
+			</footer>
         </body>
         <script src="accueil.js"></script>
         </html>

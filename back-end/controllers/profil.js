@@ -53,7 +53,34 @@ exports.getOneProfilUnique = function(req, res) {
         })
     }
 }
+// recupere le profil de l'utilisateur qui a poster le gif 
 
+exports.getOneProfilUser = function(req, res) {
+    var reqParamsId = req.params.id
+
+
+    if (!req.params.id) {
+        return res.status(400).json({
+            message: "ere"
+        })
+    } else {
+        Profil.getOneProfil(reqParamsId, (err, data) => {
+            if (err) {
+                res.status(400).json({
+                    message: ""
+                })
+            } else {
+                res.status(200).json({
+                    data
+                })
+
+                console.log(req.params.id)
+                console.log(data)
+
+            }
+        })
+    }
+}
 exports.updateProfil = function(req, res, next) {
 
     const profilObject = req.file ? {
