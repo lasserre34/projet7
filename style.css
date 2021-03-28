@@ -406,6 +406,9 @@ padding: 10px ;
     margin-bottom: 3%;
    
 }
+.imageProfil{
+  width:250px
+}
 #link-login:hover{
     border-bottom: solid #bb4e56;
     width:15%

@@ -151,7 +151,7 @@ function connexion() {
                 localStorage.setItem("userId", element.userId);
                 localStorage.setItem('admin' , element.admin )
                
-                sessionStorage.setItem("token", JSON.stringify(response.token))
+              
                 tbltUserId.push(element.userId)
                 tbltPseudo.push(element.pseudo)
                 tbltPseudoCommentaire.push(element.pseudo)

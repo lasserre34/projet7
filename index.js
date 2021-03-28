@@ -71,7 +71,7 @@ function getProfilUserPost(){
                 <a href="#" onclick="exitProfil()">exit<i class="fas fa-times"></i></a>
                 <div id="divImageProfil">
 
-                <img alt="image de profil" src=${element.imageProfil}></div>
+                <img class="imageProfil" alt="image de profil" src=${element.imageProfil}></div>
                 <p>Pseudo: ${element.pseudo}</p><br>
                 <p>Prenom: ${element.first_Name}</p><br>
                 <p>Nom: ${element.last_Name}</p><br>
@@ -148,7 +148,7 @@ document.getElementById('deroulantBlock').style.display="none" ;
                 <a href="#" onclick="exitProfil()">exit<i class="fas fa-times"></i></a>
                 <div id="divImageProfil">
 
-                <img alt="image de profil" src=${element.imageProfil}></div>
+                <img class="imageProfil" alt="image de profil" src=${element.imageProfil}></div>
                 <p>Pseudo: ${element.pseudo}</p><br>
                 <p>Prenom: ${element.first_Name}</p><br>
                 <p>Nom: ${element.last_Name}</p><br>

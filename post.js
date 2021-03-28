@@ -1,9 +1,8 @@
 
-
-// recupération du cookie 
-if(document.length == 0){
-  document.location.href="index.html"
+if(document.cookie.length == 0){
+    document.location.href="index.html"
 }
+
 var cookie = document.cookie.split('token=')
  console.log(cookie[1])
 
