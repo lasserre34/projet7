@@ -235,7 +235,7 @@ function modifyProfil() {
             tbltPseudo = []
             tbltPseudo.push(response)
             document.getElementById('getPost').innerHTML = "";
-            localStorage.setItem('pseudo' , document.getElementById('pseudoUpdate').value)
+            localStorage.setItem('pseudo' , response)
             buttonProfil()
             getALLpost()
 

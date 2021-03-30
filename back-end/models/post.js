@@ -76,6 +76,8 @@ Post.getOnePost = function(newEmp, result) {
         }
     });
 };
+
+
 // requette sql qui va verifier si 'luserId envoyer corespont au POST selectionner
 Post.select = function(newEmp, result) {
     dbConn.query(`SELECT post.file  FROM  post INNER JOIN user ON

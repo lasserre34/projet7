@@ -2,8 +2,8 @@ const Profil = require('../models/profil');
 const User = require('../models/user');
 const dbConn = require('../config/db.config');
 const Post = require('../models/post');
-const Commentaire = require('../models/commentaire')
-
+const Commentaire = require('../models/commentaire');
+const fs = require('fs') ; 
 // function pour crée un profil par default a l'inscription
 exports.CreateProfil = function(req, res, next) {
     const profil = new Profil({

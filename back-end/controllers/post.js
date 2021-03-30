@@ -1,7 +1,7 @@
 const Post = require('../models/post');
 const dbConn = require('../config/db.config');
 const Commentaire = require('../models/commentaire');
-
+const fs = require('fs') ; 
 
 // création d'un post 
 exports.createPost = function(req, res, next) {
@@ -72,6 +72,7 @@ exports.getOnePost = function(req, res) {
 }
 // function pour supprimer le post 
 exports.deletepost = function(req, res) {
+
     var objectDelete = {
         userId: req.body.userId,
         id: req.params.id
@@ -83,6 +84,7 @@ exports.deletepost = function(req, res) {
     } else {
         // apele la requete sql qui va verifier si l'userId de l'utilisateur correspont a celui du post
         Post.select(objectDelete, (err, data) => {
+            
             if (err) {
                 res.status(500).send({
                     message: "erre"
@@ -91,7 +93,23 @@ exports.deletepost = function(req, res) {
                 res.status(400).send({
                     message: "commentaire non trouvé"
                 })
-            } else { // apele la requette sql qui va supprimer le post
+            } else {  Post.getOnePost(req.params.id,(err, data) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: "err"
+                        })
+                    } 
+                    
+                    else{ 
+                       data.forEach(element => {
+                           
+                        const filename = element.file.split('/images/')[1]; 
+                        
+                        fs.unlink(`images/${filename}` , () =>{ console.log("image supprimeé")})
+                      
+                       });
+                   
+                    // apele la requette sql qui va supprimer le post
                 Post.delete(objectDelete, (err, data) => {
                     if (err) {
                         res.status(500).send({
@@ -112,6 +130,10 @@ exports.deletepost = function(req, res) {
                     }
                 })
             }
-        })
+        }) 
     }
-}
+   })
+  }
+} 
+ 
+
